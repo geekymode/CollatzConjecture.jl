@@ -14,8 +14,8 @@ Welcome to the documentation for GrayCoding!
 
 [CollatzConjecture](https://github.com/geekymode/CollatzConjecture.jl) is a formal TBD.
 
-* Encoding: ``\textbf{g}=G \textbf{b} ``
-* Decoding: ``\textbf{b}=B \textbf{g} ``
+* Encoding: $\textbf{g}=G \textbf{b}$
+* Decoding: $\textbf{b}=B \textbf{g}$
 
 
 
@@ -56,7 +56,7 @@ If you use this package in your work, please cite it as
 author = {
             R. Pulikkoonattu 
          },
-title  = {GrayCoding.jl: Algebra of Gray Coding and Applications},
+title  = {CollatzConjecture.jl: Toying with Collatz Conjecture },
 month  = {1},
 year   = {2025},
 doi    = {10.5281/zenodo.xxx},
