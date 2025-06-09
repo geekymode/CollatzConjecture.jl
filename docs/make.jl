@@ -22,6 +22,7 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/geekymode/CollatzConjecture.jl",
+    repo="github.com/geekymode/CollatzConjecture.jl.git",
     devbranch="main",
+    branch = "gh-pages"
 )
