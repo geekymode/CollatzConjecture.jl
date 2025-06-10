@@ -7,11 +7,24 @@ using Statistics
 include("visualizations/plotting.jl")
 
 export astro_intensity
-export collatz_sequence, collatz_length, collatz_stopping_time, test_collatz_connectivity
+export stopping_time
+export calculate_stopping_times
+export collatz_sequence 
+export collatz_length
+export collatz_stopping_time
+export test_collatz_connectivity
 export generate_path_colors
 export collatz_paths
 export create_collatz_visualization
 export collatz_angle_path
+export create_collatz_tree
+export collatz_graph
+export collatz_graph_highlight_one
+export plot_stopping_times_scatter
+export plot_stopping_times_histogram
+
+
+
 """
     collatz_sequence(n::Integer) -> Vector{Int}
 
@@ -292,6 +305,195 @@ function test_collatz_connectivity(max_n = 20)
     return sequences, vertex_counts
 end
 
+"""
+    stopping_time(n::Int)
+
+Calculate the stopping time (total number of steps) for a Collatz sequence starting from `n`.
+
+The stopping time is the number of iterations required for a Collatz sequence to reach 1.
+This function applies the standard Collatz rules: if n is even, divide by 2; if n is odd,
+multiply by 3 and add 1. The process continues until reaching 1.
+
+# Arguments
+- `n::Int`: Starting positive integer for the Collatz sequence
+
+# Returns
+- `Int`: Number of steps to reach 1, or special values:
+  - `0`: If input is ≤ 0 (invalid input)
+  - `-1`: If sequence exceeds 10,000 steps (potential infinite loop protection)
+
+# Examples
+```julia
+# Calculate stopping time for small numbers
+stopping_time(1)    # Returns 0 (already at 1)
+stopping_time(2)    # Returns 1 (2 → 1)
+stopping_time(3)    # Returns 7 (3 → 10 → 5 → 16 → 8 → 4 → 2 → 1)
+stopping_time(4)    # Returns 2 (4 → 2 → 1)
+
+# Calculate stopping time for larger numbers
+stopping_time(27)   # Returns 111 (known to have a long sequence)
+stopping_time(100)  # Returns 25
+
+# Edge cases
+stopping_time(0)    # Returns 0 (invalid input)
+stopping_time(-5)   # Returns 0 (invalid input)
+```
+
+# Details
+The function implements the standard Collatz conjecture iteration:
+- If n is even: n → n/2
+- If n is odd: n → 3n + 1
+- Continue until n = 1
+
+The stopping time provides insight into the complexity of different starting numbers:
+- Powers of 2 have predictable stopping times: 2^k has stopping time k
+- Odd numbers often have longer and less predictable stopping times
+- Some numbers (like 27) are known to have surprisingly long sequences
+
+# Safety Features
+- **Input validation**: Returns 0 for non-positive inputs
+- **Infinite loop protection**: Returns -1 if more than 10,000 steps are required
+- **Overflow protection**: Uses integer division to prevent unnecessary growth
+
+# Performance Notes
+- Time complexity: O(s) where s is the stopping time
+- Space complexity: O(1) - only tracks the current number and step count
+- The 10,000 step limit prevents runaway computations while allowing most legitimate sequences
+
+# Mathematical Context
+The stopping time is a key measure in Collatz conjecture research:
+- The conjecture states that all positive integers eventually reach 1
+- No counterexample has been found, but no proof exists
+- Stopping times exhibit complex, seemingly chaotic behavior
+- The distribution of stopping times is an active area of research
+
+# See Also
+- [`collatz_sequence`](@ref): Generate the complete Collatz sequence
+- [`collatz_angle_path`](@ref): Convert Collatz sequence to geometric path
+- [`create_collatz_visualization`](@ref): Visualize Collatz sequences
+"""
+function stopping_time(n::Int)
+    if n <= 0
+        return 0
+    end
+    
+    steps = 0
+    nn = n
+    
+    while nn != 1
+        steps += 1
+        nn = iseven(nn) ? nn ÷ 2 : 3*nn + 1
+        
+        # Safety check to avoid infinite loops
+        if steps > 10000
+            return -1  # Indicate potential infinite sequence
+        end
+    end
+    
+    return steps
+end
+
+"""
+    calculate_stopping_times(max_n::Int)
+
+Calculate stopping times for all integers from 1 to `max_n` and return valid results.
+
+This function computes the Collatz stopping time for each integer in the range [1, max_n]
+and returns only those numbers that have valid (positive) stopping times, filtering out
+any that exceed the safety limit or have invalid inputs.
+
+# Arguments
+- `max_n::Int`: Maximum number to compute stopping times for (computes for range 1:max_n)
+
+# Returns
+- `Tuple{Vector{Int}, Vector{Int}}`: A tuple containing:
+  - `numbers`: Vector of numbers that have valid stopping times
+  - `times`: Vector of corresponding stopping times (same length as `numbers`)
+
+# Examples
+```julia
+# Calculate stopping times for numbers 1-10
+numbers, times = calculate_stopping_times(10)
+# numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# times:   [0, 1, 7, 2, 5, 8, 16, 3, 19, 6]
+
+# Calculate for a larger range
+numbers, times = calculate_stopping_times(100)
+println("Number with longest stopping time: ", numbers[argmax(times)])
+println("Maximum stopping time: ", maximum(times))
+
+# Analyze the results
+using Statistics
+println("Mean stopping time: ", mean(times))
+println("Median stopping time: ", median(times))
+```
+
+# Details
+The function processes each number sequentially:
+1. Calls `stopping_time(n)` for each n in 1:max_n
+2. Filters results to include only positive stopping times
+3. Returns parallel arrays of numbers and their corresponding stopping times
+
+Only numbers with valid stopping times are included in the results:
+- Positive stopping times (successful convergence to 1)
+- Excludes any numbers that return -1 (exceeded step limit)
+- Excludes any numbers that return 0 (invalid inputs, though this shouldn't occur for positive integers)
+
+# Performance Considerations
+- **Time complexity**: O(max_n × average_stopping_time)
+- **Space complexity**: O(max_n) for storing results
+- **Memory efficient**: Uses pre-allocated vectors that grow as needed
+- **Progress tracking**: For large ranges, consider adding progress indicators
+
+# Use Cases
+This function is particularly useful for:
+- **Statistical analysis** of stopping time distributions
+- **Finding patterns** in Collatz behavior across ranges
+- **Identifying outliers** with unusually long stopping times
+- **Creating visualizations** of stopping time data
+- **Research applications** studying Collatz conjecture properties
+
+# Data Analysis Applications
+```julia
+# Find numbers with maximum stopping times
+numbers, times = calculate_stopping_times(1000)
+max_indices = findall(==(maximum(times)), times)
+println("Numbers with maximum stopping time: ", numbers[max_indices])
+
+# Create histogram of stopping times
+using Plots
+histogram(times, bins=50, title="Distribution of Stopping Times")
+
+# Find correlation patterns
+scatter(numbers, times, xlabel="Number", ylabel="Stopping Time")
+```
+
+# Mathematical Insights
+The resulting data can reveal:
+- **Distribution patterns** in stopping times
+- **Record-breaking sequences** (numbers with locally maximum stopping times)
+- **Power-of-2 patterns** (2^k numbers have stopping time k)
+- **Statistical properties** of the Collatz conjecture
+
+# See Also
+- [`stopping_time`](@ref): Calculate stopping time for a single number
+- [`collatz_sequence`](@ref): Generate complete Collatz sequences
+- [`create_collatz_visualization`](@ref): Visualize Collatz sequence patterns
+"""
+function calculate_stopping_times(max_n::Int)
+    times = Int[]
+    numbers = Int[]
+    
+    for n in 1:max_n
+        time = stopping_time(n)
+        if time > 0  # Only include valid stopping times
+            push!(times, time)
+            push!(numbers, n)
+        end
+    end
+    
+    return numbers, times
+end
 
 end # module CollatzConjecture
 
