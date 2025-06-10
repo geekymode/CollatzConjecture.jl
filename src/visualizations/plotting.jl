@@ -192,8 +192,7 @@ paths = collatz_paths([3, 5, 7], 0.5, π/4, 1.0)
 paths = collatz_paths(1:10, 0.3, π/6, 1.5)
 ```
 
-# See Also
-- [`collatz_angle_path`]( ): Generate a single Collatz angle path
+
 """
 function collatz_paths(numbers, e, a, f)
     return [collatz_angle_path(n, e, a, f) for n in numbers]
