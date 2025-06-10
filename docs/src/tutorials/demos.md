@@ -5,8 +5,17 @@
 ```@example plotsConnect
 using CollatzConjecture
 test_sequences, shared_vertices = test_collatz_connectivity(10)
+test_sequences
+shared_vertices
 ```
 
+# Stopping time
+
+
+```@example StopTime
+using CollatzConjecture
+plot_stopping_times_scatter(5000)
+```
 ## Fancy representation
 
 ```@example plotsTree
@@ -37,5 +46,5 @@ figX[1]
 
 ```@example StopTimeHist
 using CollatzConjecture
-    plot_stopping_times_histogram(10000)
+    plot_stopping_times_histogram(100000)
 ```
