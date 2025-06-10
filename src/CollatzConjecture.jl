@@ -5,6 +5,7 @@ using Graphs, GraphMakie, NetworkLayout
 using Statistics
 
 include("visualizations/plotting.jl")
+include("visualizations/fractals.jl")
 
 export astro_intensity
 export stopping_time
@@ -23,6 +24,22 @@ export collatz_graph_highlight_one
 export plot_stopping_times_scatter
 export plot_stopping_times_histogram
 export create_collatz_with_labels
+
+
+export plot_collatz_fractal_interactive
+export complex_collatz
+export mobius_collatz
+export complex_collatz_alt
+export complex_collatz_hybrid
+export generate_complex_collatz_julia
+export create_complex_collatz_colormap
+export plot_collatz_fractal
+export plot_collatz_julia
+export plot_collatz_zoom
+export plot_collatz_zoom_grid_old
+export generate_grid_centers
+export plot_collatz_zoom_grid
+
 
 """
     collatz_sequence(n::Integer) -> Vector{Int}
