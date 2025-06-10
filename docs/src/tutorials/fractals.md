@@ -34,3 +34,31 @@ maxIter = 25
 zoomPlot, data1 = plot_collatz_zoom(num, 0.0, 1.0 / 500, 1.0 / 500, 1000, maxIter, complex_collatz, "n=$(num),max_iter=$(maxIter),stop_time($(num))=$(collatz_length(num))")
 zoomPlot   
 ```
+
+
+## Convergence near integer points
+
+```@example grid9
+using CollatzConjecture
+# Define 9 center points
+centers_x = [5.0, 597.0, 23.0, 11.0, 100.0, 49.0, 141.0, 6.0, 7.0]
+centers_y = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0, -0.0, -0.0]
+
+# Progressive zoom levels - getting smaller (more zoomed in)
+zoom_widths = [1.0/10, 1/20, 1/100, 1/20, 0.04, 1/200, 1/200, 1/20, 1/40]
+zoom_heights = [1.0/10, 1/20, 1/100, 1/20, 0.04, 1/200, 1/200, 1/20, 1/40]
+
+# Different iterations for each subplot
+max_iters = [25, 27, 20, 25, 25, 26, 25, 26, 25]
+# Create grid plot
+grid_fig, grid_data = plot_collatz_zoom_grid(
+    centers_x, centers_y,
+    zoom_widths, zoom_heights,
+    300, max_iters,
+    complex_collatz,
+    ""
+)
+save("assets/collatz_grid_3x3.png", grid_fig)
+grid_fig
+
+```
