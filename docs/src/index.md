@@ -64,9 +64,6 @@ url    = {https://github.com/geekymode/CollatzConjecture.jl}
 }
 ```
 
-```@index
-Pages = ["misc.md"]
-```
 
 ```@autodocs
 Modules = [CollatzConjecture]
