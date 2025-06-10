@@ -1,5 +1,6 @@
 using CollatzConjecture
 using Documenter
+using CairoMakie
 
 DocMeta.setdocmeta!(CollatzConjecture, :DocTestSetup, :(using CollatzConjecture); recursive=true)
 
