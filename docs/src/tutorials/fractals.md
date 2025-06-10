@@ -62,3 +62,27 @@ grid_fig, grid_data = plot_collatz_zoom_grid(
 grid_fig
 
 ```
+
+## Close in view
+
+```@example gridZoom
+using CollatzConjecture
+# Define 9 center points
+centers_x = [5.0, 597.0, 23.0, 11.0, 100.0, 49.0, 141.0, 6.0, 7.0]
+centers_y = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0, -0.0, -0.0]
+
+# Progressive zoom levels - getting smaller (more zoomed in)
+zoom_widths = [1.0/10, 1/20, 1/100, 1/20, 0.04, 1/200, 1/200, 1/20, 1/40]
+zoom_heights = [1.0/10, 1/20, 1/100, 1/20, 0.04, 1/200, 1/200, 1/20, 1/40]
+
+# Different iterations for each subplot
+max_iters = [25, 27, 20, 25, 25, 26, 25, 26, 25]
+grid_fig_zoom, grid_data_zoom = plot_collatz_zoom_grid(
+    centers_x, centers_y,
+    zoom_widths ./10, zoom_heights ./10,
+    300, max_iters,
+    complex_collatz,
+    ""
+)
+grid_fig_zoom
+```
