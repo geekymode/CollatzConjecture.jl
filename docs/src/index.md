@@ -46,6 +46,17 @@ fig
 !!! tip
     This is still under active development.
 
+    ```@example largesetplot
+    using CollatzConjecture
+    using CairoMakie
+
+    CairoMakie.activate!()
+
+    # Larger set visualization
+    fig = create_collatz_visualization()
+    fig
+```
+
 ## Resources for getting started
 
 There are a few ways to get started with CollatzConjecture:
