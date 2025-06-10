@@ -33,7 +33,7 @@ This package provides multiple ways to visualize these sequences and explore the
 Here's a basic visualization of Collatz sequences using the default parameters:
 
 ```@example main
-using YourPackageName # Replace with your actual package name
+using CollatzConjecture 
 using CairoMakie
 
 # Set the backend for proper rendering
@@ -44,7 +44,7 @@ fig = create_collatz_visualization()
 
 # Display the figure
 fig
-
+```
 
 
 !!! tip
