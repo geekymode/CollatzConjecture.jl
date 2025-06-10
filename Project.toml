@@ -3,7 +3,11 @@ uuid = "7653e0a5-60b0-4f1f-8cf0-e76f3cfe9cb0"
 authors = ["Rethna Pulikkoonattu et al."]
 version = "1.0.0-DEV"
 
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+
 [compat]
+CairoMakie = "0.13.10"
 julia = "1.11.5"
 
 [extras]
