@@ -16,15 +16,15 @@ makedocs(;
     pages=[
         "Home" => "index.md",
         "Tutorials" => [
-            "Demos"=> "tutorials/demos.md",
-            "Fractals" => "tutorials/fractals.md",
-            "API Reference" => "api.md"
-        ]
+            "Demos" => "tutorials/demos.md",
+            "Fractals" => "tutorials/fractals.md"
+        ],
+        "API Reference" => "api.md"
     ],
 )
 
 deploydocs(;
     repo="github.com/geekymode/CollatzConjecture.jl.git",
     devbranch="main",
-    branch = "gh-pages"
+    branch="gh-pages"
 )

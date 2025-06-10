@@ -1,3 +1,6 @@
+push!( LOAD_PATH, "../" )
+import CollatzConjecture  # Import the module to  have access to functions
+
 """
     astro_intensity(l, s, r, h, g)
 
