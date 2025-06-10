@@ -30,7 +30,24 @@ This package provides multiple ways to visualize these sequences and explore the
 
 ## Quick Start
 
-Here's a basic visualization of Collatz sequences using the default parameters:
+Here's a basic visualization of the first 25 Collatz sequences represented in the form of a tree.
+
+```@example plot25
+using CollatzConjecture
+using CairoMakie
+
+CairoMakie.activate!()
+
+fig_first_25 = create_collatz_with_labels(
+    n=25, label_fontsize=20,use_range = true,
+    s = 2.49, r = 0.76, h = 1.815, g = 1.3, 
+    opacity = 0.93,  # Lower opacity for many lines
+    e = 1.3, a = 0.19, f = 0.7,
+    label_color=:gray)
+```
+
+### Fancy Visualizations
+
 
 ```@example plots
 using CollatzConjecture
