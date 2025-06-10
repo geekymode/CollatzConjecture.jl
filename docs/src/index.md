@@ -46,19 +46,9 @@ fig_first_25 = create_collatz_with_labels(
     label_color=:gray)
 ```
 
-### Fancy Visualizations
+## Fancy Visualizations
 
 
-```@example plots
-using CollatzConjecture
-using CairoMakie
-
-CairoMakie.activate!()
-
-# Create and display the visualization
-fig = create_collatz_visualization(n=50, print_numbers=true)
-fig
-```
 
 ```@example plots2
 using CollatzConjecture
