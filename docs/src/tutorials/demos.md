@@ -27,7 +27,7 @@ using CollatzConjecture
 using CairoMakie
 
 CairoMakie.activate!()
-figX = collatz_graph_highlight_one(300, vertex_size=10, highlight_size=20, label_fontsize=10,vertex_style = RGBA(0.0, 0.749, 1.0, 0.8))
+figX = collatz_graph_highlight_one(300, vertex_size=10, highlight_size=20, label_fontsize=10)
 figX[1]
 ```
 
