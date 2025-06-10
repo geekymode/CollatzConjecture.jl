@@ -46,7 +46,7 @@ using CollatzConjecture
 ```
 
 
-
+<!-- 
 ```@autodocs
 Modules = [CollatzConjecture]
-```
+``` -->
