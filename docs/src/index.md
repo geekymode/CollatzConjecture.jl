@@ -35,13 +35,12 @@ Here's a basic visualization of Collatz sequences using the default parameters:
 ```@example plots
 using CollatzConjecture
 using CairoMakie
-CairoMakie.activate!()
-using CollatzConjecture
-using CairoMakie
 
+CairoMakie.activate!()
+
+# Create and display the visualization
 fig = create_collatz_visualization(n=50, print_numbers=true)
-save("assets/collatz.png", fig)  # Save the figure to a path within your docs
-![](assets/collatz.png)
+fig
 ```
 
 !!! tip
