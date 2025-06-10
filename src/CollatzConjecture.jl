@@ -9,7 +9,7 @@ include("visualizations/plotting.jl")
 export astro_intensity
 export stopping_time
 export calculate_stopping_times
-export collatz_sequence 
+export collatz_sequence
 export collatz_length
 export collatz_stopping_time
 export test_collatz_connectivity
@@ -22,8 +22,7 @@ export collatz_graph
 export collatz_graph_highlight_one
 export plot_stopping_times_scatter
 export plot_stopping_times_histogram
-
-
+export create_collatz_with_labels
 
 """
     collatz_sequence(n::Integer) -> Vector{Int}
@@ -94,18 +93,18 @@ function collatz_sequence(n)
     if n ≤ 0
         throw(ArgumentError("Input must be a positive integer, got: $n"))
     end
-    
+
     sequence = Int[]
     nn = n
-    
+
     while nn != 1
         push!(sequence, nn)
-        nn = iseven(nn) ? nn ÷ 2 : 3*nn + 1
+        nn = iseven(nn) ? nn ÷ 2 : 3 * nn + 1
     end
-    
+
     # Add the final 1
     push!(sequence, nn)
-    
+
     return sequence
 end
 
@@ -155,7 +154,7 @@ function collatz_length(n)
     nn = n
     while nn != 1
         length += 1
-        nn = iseven(nn) ? nn ÷ 2 : 3*nn + 1
+        nn = iseven(nn) ? nn ÷ 2 : 3 * nn + 1
     end
     return length + 1  # +1 to include the final 1
 end
@@ -211,7 +210,7 @@ function collatz_stopping_time(n)
     nn = n
     while nn != 1
         steps += 1
-        nn = iseven(nn) ? nn ÷ 2 : 3*nn + 1
+        nn = iseven(nn) ? nn ÷ 2 : 3 * nn + 1
     end
     return steps
 end
@@ -265,7 +264,7 @@ complete Collatz sequence starting from n.
 
 See also: [`collatz_sequence`](@ref), [`collatz_length`](@ref), [`collatz_stopping_time`](@ref)
 """
-function test_collatz_connectivity(max_n = 20)
+function test_collatz_connectivity(max_n=20)
     println("=== Testing Collatz sequence connectivity ===")
     # Generate a few sequences and show how they connect
     sequences = []
@@ -274,7 +273,7 @@ function test_collatz_connectivity(max_n = 20)
         push!(sequences, (n, seq))
         println("$n: $(seq) (length: $(length(seq)))")
     end
-    
+
     # Find shared vertices
     all_vertices = Set{Int}()
     for (n, seq) in sequences
@@ -283,9 +282,9 @@ function test_collatz_connectivity(max_n = 20)
         end
     end
     println("\nAll unique vertices: $(sort(collect(all_vertices)))")
-    
+
     # Show which sequences share which vertices
-    vertex_counts = Dict{Int, Vector{Int}}()
+    vertex_counts = Dict{Int,Vector{Int}}()
     for (n, seq) in sequences
         for v in seq
             if !haskey(vertex_counts, v)
@@ -294,14 +293,14 @@ function test_collatz_connectivity(max_n = 20)
             push!(vertex_counts[v], n)
         end
     end
-    
+
     println("\nShared vertices (vertex -> sequences that contain it):")
     for v in sort(collect(keys(vertex_counts)))
         if length(vertex_counts[v]) > 1
             println("  $v appears in sequences: $(vertex_counts[v])")
         end
     end
-    
+
     return sequences, vertex_counts
 end
 
@@ -376,20 +375,20 @@ function stopping_time(n::Int)
     if n <= 0
         return 0
     end
-    
+
     steps = 0
     nn = n
-    
+
     while nn != 1
         steps += 1
-        nn = iseven(nn) ? nn ÷ 2 : 3*nn + 1
-        
+        nn = iseven(nn) ? nn ÷ 2 : 3 * nn + 1
+
         # Safety check to avoid infinite loops
         if steps > 10000
             return -1  # Indicate potential infinite sequence
         end
     end
-    
+
     return steps
 end
 
@@ -483,7 +482,7 @@ The resulting data can reveal:
 function calculate_stopping_times(max_n::Int)
     times = Int[]
     numbers = Int[]
-    
+
     for n in 1:max_n
         time = stopping_time(n)
         if time > 0  # Only include valid stopping times
@@ -491,10 +490,8 @@ function calculate_stopping_times(max_n::Int)
             push!(numbers, n)
         end
     end
-    
+
     return numbers, times
 end
 
 end # module CollatzConjecture
-
-
