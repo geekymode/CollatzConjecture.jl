@@ -16,7 +16,8 @@ makedocs(;
         "Home" => "index.md",
         "Tutorials" => [
             "Demos"=> "tutorials/demos.md",
-            "Fractals" => "tutorials/fractals.md"
+            "Fractals" => "tutorials/fractals.md",
+            "API Reference" => "api.md"
         ]
     ],
 )

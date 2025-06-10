@@ -1,4 +1,6 @@
-markdown# API Reference
+# API Reference
+
+```@index
 
 ```@autodocs
 Modules = [CollatzConjecture]
