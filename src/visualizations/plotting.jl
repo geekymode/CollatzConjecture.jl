@@ -1,4 +1,4 @@
-push!( LOAD_PATH, "../" )
+# push!( LOAD_PATH, "../" )
 import CollatzConjecture  # Import the module to  have access to functions
 
 """
@@ -53,7 +53,6 @@ Where ψ = 2π * (s/3 + r * l) represents the phase angle for color calculation.
 
 All output values are clamped to the valid color range [0,1].
 
-See also: [`clamp`](@ref)
 """
 function astro_intensity(l, s, r, h, g)
     psi = 2π * (s/3 + r * l)

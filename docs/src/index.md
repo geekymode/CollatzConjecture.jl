@@ -8,7 +8,7 @@ Documentation for [CollatzConjecture](https://github.com/geekymode/CollatzConjec
 
 # Introduction
 
-Welcome to the documentation for GrayCoding!
+Welcome to the documentation for CollatzConjecture!
 
 ## What is CollatzConjecture.jl?
 
@@ -20,11 +20,11 @@ Welcome to the documentation for GrayCoding!
 
 
 !!! tip
-    This is still under active devlopment.
+    This is still under active development.
 
 ## Resources for getting started
 
-There are few ways to get started with GrayCoding:
+There are a few ways to get started with CollatzConjecture:
 
 ## Installation
 
