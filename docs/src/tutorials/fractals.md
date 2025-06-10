@@ -58,7 +58,7 @@ grid_fig, grid_data = plot_collatz_zoom_grid(
     complex_collatz,
     ""
 )
-save("assets/collatz_grid_3x3.png", grid_fig)
+# save("assets/collatz_grid_3x3.png", grid_fig)
 grid_fig
 
 ```
