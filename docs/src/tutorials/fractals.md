@@ -5,8 +5,12 @@ using CollatzConjecture
 using CairoMakie
 
 CairoMakie.activate!()
+    width, height = 1000, 1000
     x_range = (-2.5, 2.5)
     y_range = (-2.5, 2.5)
+    max_iterations = 8
+    julia_data_main = generate_complex_collatz_julia(width, height, x_range, y_range,
+    complex_collatz, max_iterations)
 plot_collatz_julia(julia_data_main, x_range, y_range,
     "Complex Collatz Julia Set",
     "T(z) = ¼(2 + 7z - (2 + 5z)cos(πz))",
