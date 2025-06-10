@@ -47,24 +47,6 @@ using CollatzConjecture
 
 
 
-
-## Citation
-
-If you use this package in your work, please cite it as
-```
-@software{rethna2025CollatzConjectureJulia,
-author = {
-            R. Pulikkoonattu 
-         },
-title  = {CollatzConjecture.jl: Toying with Collatz Conjecture },
-month  = {1},
-year   = {2025},
-doi    = {10.5281/zenodo.xxx},
-url    = {https://github.com/geekymode/CollatzConjecture.jl}
-}
-```
-
-
 ```@autodocs
 Modules = [CollatzConjecture]
 ```
