@@ -8,7 +8,10 @@ include("visualizations/plotting.jl")
 
 export astro_intensity
 export collatz_sequence, collatz_length, collatz_stopping_time, test_collatz_connectivity
-
+export generate_path_colors
+export collatz_paths
+export create_collatz_visualization
+export collatz_angle_path
 """
     collatz_sequence(n::Integer) -> Vector{Int}
 

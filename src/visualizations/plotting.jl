@@ -259,9 +259,7 @@ The visualization process:
 Each path is colored using the `generate_path_colors` function with astronomical
 intensity mapping, creating smooth color transitions along the sequence.
 
-# See Also
-- [`collatz_paths`]( ): Generate multiple Collatz angle paths
-- [`generate_path_colors`]( ): Generate colors for path visualization
+
 """
 function create_collatz_visualization(;
     # Color parameters
@@ -423,10 +421,7 @@ last numbers.
 - Labels are offset slightly below vertices to avoid overlap with dots
 - Very long sequences are automatically subsampled to prevent overcrowding
 
-# See Also
-- [`create_collatz_visualization`]( ): Create unlabeled Collatz visualization
-- [`collatz_paths`]( ): Generate multiple Collatz angle paths
-- [`generate_path_colors`]( ): Generate colors for path visualization
+
 """
 function create_collatz_with_labels(;
     # Color parameters
