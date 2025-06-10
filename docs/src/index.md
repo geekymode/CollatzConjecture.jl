@@ -32,13 +32,17 @@ This package provides multiple ways to visualize these sequences and explore the
 
 Here's a basic visualization of Collatz sequences using the default parameters:
 
+```@example plots
+using CollatzConjecture
+using CairoMakie
+CairoMakie.activate!()
 using CollatzConjecture
 using CairoMakie
 
 fig = create_collatz_visualization(n=50, print_numbers=true)
 save("assets/collatz.png", fig)  # Save the figure to a path within your docs
 ![](assets/collatz.png)
-
+```
 
 !!! tip
     This is still under active development.
