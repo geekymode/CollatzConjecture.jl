@@ -7,9 +7,6 @@ using Statistics
 include("visualizations/plotting.jl")
 
 export astro_intensity
-
-# Write your package code here.
-# Export the main function so users can access it directly
 export collatz_sequence, collatz_length, collatz_stopping_time, test_collatz_connectivity
 
 """
