@@ -14,8 +14,36 @@ Welcome to the documentation for CollatzConjecture!
 
 [CollatzConjecture](https://github.com/geekymode/CollatzConjecture.jl) is a formal TBD.
 
-* Encoding: $\textbf{g}=G \textbf{b}$
-* Decoding: $\textbf{b}=B \textbf{g}$
+
+# Collatz Conjecture Visualizations
+
+Welcome to the Collatz Conjecture Visualization package! This package provides tools for exploring and visualizing the famous Collatz conjecture through various mathematical and artistic representations.
+
+## Overview
+
+The Collatz conjecture is one of the most famous unsolved problems in mathematics. Starting with any positive integer n:
+- If n is even, divide it by 2
+- If n is odd, multiply by 3 and add 1
+- Repeat until you reach 1
+
+This package provides multiple ways to visualize these sequences and explore their mathematical properties.
+
+## Quick Start
+
+Here's a basic visualization of Collatz sequences using the default parameters:
+
+```@example main
+using YourPackageName # Replace with your actual package name
+using CairoMakie
+
+# Set the backend for proper rendering
+CairoMakie.activate!()
+
+# Create a basic Collatz visualization
+fig = create_collatz_visualization()
+
+# Display the figure
+fig
 
 
 
