@@ -9,9 +9,7 @@ This is Documentation for the Julia package [CollatzConjecture](https://github.c
 The Collatz Conjecture is a simple yet fascinating mathematical problem that asks: take any positive integer and repeatedly apply a basic rule until you reach 1. The rule is straightforward—if your number is even, divide it by 2; if it's odd, multiply by 3 and add 1. For example, starting with 7: 7 → 22 → 11 → 34 → 17 → 52 → 26 → 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1. The conjecture claims that no matter which positive integer you start with, you will always eventually reach 1. Despite its elementary appearance, this problem has stumped mathematicians for decades—while it has been verified by computers for incredibly large numbers, no one has been able to prove it's true for all positive integers, making it one of the most famous unsolved problems in mathematics.
 
 
-# Collatz Conjecture Visualizations
 
-Welcome to the Collatz Conjecture Visualization package! This package provides tools for exploring and visualizing the famous Collatz conjecture through various mathematical and artistic representations.
 
 ## Overview
 
@@ -23,7 +21,7 @@ Let $f: \mathbb{Z}^+ \to \mathbb{Z}^+$ be defined by:
 
 where $\mathbb{Z}^+$ denotes the set of positive integers.
 
-## Definition 2: The Collatz Sequence
+## The Collatz Sequence
 
 For any positive integer $n_0 \in \mathbb{Z}^+$, the **Collatz sequence** starting at $n_0$ is the sequence $(n_k)_{k=0}^{\infty}$ defined by:
 
@@ -31,7 +29,7 @@ $$n_{k+1} = f(n_k) \quad \text{for } k \geq 0$$
 
 with initial condition $n_0$ given.
 
-## Definition 3: Stopping Time
+## Stopping Time
 
 For a given starting value $n_0$, the **stopping time** $T(n_0)$ is defined as:
 
@@ -45,12 +43,12 @@ if such a $k$ exists, and $T(n_0) = \infty$ otherwise.
 
 Equivalently: For every $n_0 \in \mathbb{Z}^+$, there exists a finite $k$ such that $n_k = 1$.
 
-## Alternative Formulations
 
-### Formulation 1 (Trajectory Convergence)
+
+### Trajectory Convergence
 Every orbit of the dynamical system defined by $f$ eventually reaches the fixed point 1.
 
-### Formulation 2 (Universal Convergence)
+### Universal Convergence
 $$\forall n_0 \in \mathbb{Z}^+ : \exists k \in \mathbb{N} \text{ such that } f^{(k)}(n_0) = 1$$
 
 where $f^{(k)}$ denotes the $k$-fold composition of $f$.
@@ -63,7 +61,10 @@ where $f^{(k)}$ denotes the $k$-fold composition of $f$.
 
 3. The conjecture remains one of the most famous unsolved problems in mathematics, connecting elementary number theory with dynamical systems theory.
 
-This package provides multiple ways to visualize these sequences and explore their mathematical properties.
+
+# Visualizations
+
+This package provides tools for exploring and visualizing the famous Collatz conjecture through various mathematical and artistic representations.
 
 ## Quick Start
 
