@@ -43,19 +43,19 @@ fig = create_collatz_visualization(n=50, print_numbers=true)
 fig
 ```
 
+```@example plots2
+using CollatzConjecture
+using CairoMakie
+
+CairoMakie.activate!()
+
+# Large set visualization
+fig = create_collatz_visualization()
+fig
+```
+
 !!! tip
     This is still under active development.
-
-    ```@example largesetplot
-    using CollatzConjecture
-    using CairoMakie
-
-    CairoMakie.activate!()
-
-    # Larger set visualization
-    fig = create_collatz_visualization()
-    fig
-```
 
 ## Resources for getting started
 
