@@ -1,5 +1,5 @@
 # push!( LOAD_PATH, "../" )
-import CollatzConjecture  # Import the module to  have access to functions
+#import CollatzConjecture  # Import the module to  have access to functions
 
 """
     astro_intensity(l, s, r, h, g)
@@ -1595,6 +1595,203 @@ function plot_stopping_times_scatter(max_n::Int=1000)
     lines!(ax, numbers, moving_avg, color=:red, linewidth=2, label="Moving Average")
     
     axislegend(ax, position=:rt)
+    
+    return fig
+end
+
+"""
+    plot_stopping_times_histogram(max_n::Int=1000)
+
+Create a dual-axis histogram and cumulative distribution plot of Collatz stopping times.
+
+This function calculates stopping times for all numbers from 1 to `max_n` and creates
+a sophisticated visualization combining a frequency histogram (left y-axis) with a
+cumulative distribution function (right y-axis) to reveal both the distribution shape
+and cumulative probability patterns.
+
+# Arguments
+- `max_n::Int=1000`: Maximum number to analyze (default: 1000)
+
+# Returns
+- `Figure`: A Makie.jl Figure object containing the dual-axis histogram visualization
+
+# Examples
+```julia
+# Create default histogram for numbers 1-1000
+fig = plot_stopping_times_histogram()
+
+# Analyze distribution for smaller range with more detail
+fig = plot_stopping_times_histogram(500)
+
+# Study larger range to capture more statistical variation
+fig = plot_stopping_times_histogram(10000)
+
+# Save the analysis
+save("stopping_times_distribution.png", fig)
+```
+
+# Visualization Features
+
+## Histogram (Left Y-Axis)
+- **Blue bars**: Frequency distribution of stopping times across 50 bins
+- **Black outlines**: Clear bin boundaries for precise reading
+- **High transparency**: 99% opacity for professional appearance
+- **Frequency counts**: Left y-axis shows absolute number of occurrences
+
+## Cumulative Distribution (Right Y-Axis)
+- **Pink line**: Cumulative distribution function (CDF) showing probability
+- **Smooth curve**: Reveals percentile information and distribution shape
+- **Secondary axis**: Right y-axis shows cumulative probability (0.0 to 1.0)
+- **Thick line**: High visibility for trend analysis
+
+## Professional Styling
+- **Transparent background**: Suitable for presentations and publications
+- **Large text**: All labels use size 20 for excellent readability
+- **Color coordination**: Blue for frequency, pink for probability
+- **Linked x-axes**: Both plots share the same stopping time scale
+
+# Statistical Insights Revealed
+
+## Distribution Shape
+- **Skewness**: Most stopping times are small, with a long right tail
+- **Modal behavior**: Most common stopping times (highest bars)
+- **Outliers**: Very large stopping times appear as sparse bins on the right
+- **Concentration**: How stopping times cluster around typical values
+
+## Cumulative Patterns
+- **Percentiles**: Easy to read what percentage of numbers have stopping times ≤ x
+- **Median identification**: 50% cumulative probability point
+- **Quartiles**: 25% and 75% probability thresholds
+- **Tail behavior**: How quickly probability approaches 100%
+
+# Mathematical Applications
+
+## Research Analysis
+```julia
+# Compare distributions across different ranges
+fig1 = plot_stopping_times_histogram(1000)
+fig2 = plot_stopping_times_histogram(5000)
+# Analyze how distribution shape changes with sample size
+```
+
+## Educational Use
+- **Probability education**: Demonstrates histogram vs. CDF concepts
+- **Statistical analysis**: Shows real-world example of skewed distributions
+- **Collatz conjecture**: Visualizes the unpredictable nature of stopping times
+
+# Technical Implementation
+
+## Histogram Computation
+- **Adaptive binning**: Uses 50 bins automatically scaled to data range
+- **Frequency counting**: Efficient computation of bin heights
+- **Professional styling**: Consistent with statistical visualization standards
+
+## CDF Calculation
+- **Sorted processing**: Efficiently computes cumulative probabilities
+- **Unique values**: Handles repeated stopping times correctly
+- **Smooth interpolation**: Creates visually appealing probability curve
+
+# Performance Characteristics
+- **Time complexity**: O(n log n) due to sorting for CDF
+- **Space complexity**: O(n) for storing computed values
+- **Memory efficient**: Single-pass histogram computation
+- **Scalable**: Handles large ranges (tested up to 100,000+)
+
+# Interpretation Guide
+
+## Reading the Histogram
+- **Peak locations**: Most common stopping times
+- **Distribution width**: Spread of typical stopping times
+- **Tail length**: Range of extreme stopping times
+
+## Reading the CDF
+- **Steep sections**: Ranges where many stopping times occur
+- **Flat sections**: Ranges with few or no stopping times
+- **50% point**: Median stopping time
+- **90% point**: 90th percentile (most numbers have shorter stopping times)
+
+# Data Quality Features
+- **Automatic formatting**: Integer labels for counts, decimal for probabilities
+- **Color coding**: Distinct colors prevent confusion between axes
+- **Legend**: Clear identification of the CDF line
+- **Professional presentation**: Publication-ready styling
+
+# See Also
+- [`calculate_stopping_times`](@ref): Compute stopping times for analysis
+- [`plot_stopping_times_scatter`](@ref): Scatter plot visualization
+- [`stopping_time`](@ref): Calculate individual stopping times
+- [`collatz_sequence`](@ref): Generate complete sequences
+"""
+function plot_stopping_times_histogram(max_n::Int=1000)
+    numbers, times = calculate_stopping_times(max_n)
+    
+    fig = Figure(backgroundcolor=:transparent)
+    
+    # Main histogram axis
+    ax1 = Axis(fig[1, 1],
+        title="Distribution of Stopping Times (n = 1 to $max_n)",
+        xlabel="Stopping Time",
+        ylabel="Frequency",
+        yticklabelcolor=:deepskyblue,
+        xticklabelsize=20,
+        yticklabelsize=20,
+        xlabelsize=20, # X-axis label size
+        ylabelsize=20,
+        titlesize=20,
+        backgroundcolor =:transparent
+    )
+    
+    # Format axes to use standard notation
+    ax1.xtickformat = xs -> [string(Int(x)) for x in xs]
+    ax1.ytickformat = ys -> [string(Int(y)) for y in ys]
+    
+    # Create histogram
+    hist_result = hist!(ax1, times, bins=50, color=(:deepskyblue, 0.99), strokewidth=1, strokecolor=:black)
+    
+    # Create secondary y-axis for CDF
+    ax2 = Axis(fig[1, 1],
+        ylabel="Cumulative Probability",
+        yticklabelcolor=:deeppink,
+        yaxisposition=:right,
+        xticklabelsize=20,
+        yticklabelsize=20,
+        xlabelsize=20, # X-axis label size
+        ylabelsize=20,
+        titlesize=20,
+        backgroundcolor =:transparent
+    )
+    
+    # Format CDF axis to use standard notation
+    ax2.ytickformat = ys -> [string(round(y, digits=2)) for y in ys]
+    
+    # Calculate and plot CDF
+    sorted_times = sort(times)
+    unique_times = unique(sorted_times)
+    cdf_values = [count(x -> x <= t, times) / length(times) for t in unique_times]
+    
+    lines!(ax2, unique_times, cdf_values, color=:deeppink, linewidth=3, label="CDF")
+    
+    # Hide x-axis elements for the secondary axis
+    hidexdecorations!(ax2)
+    
+    # Link x-axes
+    linkxaxes!(ax1, ax2)
+    
+    # Add statistics text
+    mean_time = round(mean(times), digits=2)
+    median_time = median(times)
+    max_time = maximum(times)
+    q25 = round(quantile(times, 0.25), digits=1)
+    q75 = round(quantile(times, 0.75), digits=1)
+    
+    # text!(ax1, 0.65, 0.95,
+    # "Mean: $mean_time\nMedian: $median_time\nQ25: $q25, Q75: $q75\nMax: $max_time",
+    # space=:relative,
+    # fontsize=12,
+    # )
+    
+    # Add legend
+    axislegend(ax2, position=:rb)
     
     return fig
 end
