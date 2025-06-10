@@ -1,5 +1,9 @@
 module CollatzConjecture
 
+using CairoMakie, Colors, LinearAlgebra
+using Graphs, GraphMakie, NetworkLayout
+using Statistics
+
 include("visualizations/plotting.jl")
 
 export astro_intensity
