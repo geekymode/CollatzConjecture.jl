@@ -22,15 +22,12 @@ $$f(n) = \begin{cases}
 
 where $\mathbb{Z}^+$ denotes the set of positive integers.
 
-## The Collatz Sequence
-
 For any positive integer $n_0 \in \mathbb{Z}^+$, the **Collatz sequence** starting at $n_0$ is the sequence $(n_k)_{k=0}^{\infty}$ defined by:
 
 $$n_{k+1} = f(n_k) \quad \text{for } k \geq 0$$
 
 with initial condition $n_0$ given.
 
-## Stopping Time
 
 For a given starting value $n_0$, the **stopping time** $T(n_0)$ is defined as:
 
@@ -38,20 +35,14 @@ $$T(n_0) = \min\{k \geq 1 : n_k = 1\}$$
 
 if such a $k$ exists, and $T(n_0) = \infty$ otherwise.
 
-## The Collatz Conjecture (3n+1 Conjecture)
 
 **Conjecture:** For every positive integer $n_0 \in \mathbb{Z}^+$, the stopping time $T(n_0)$ is finite.
 
 Equivalently: For every $n_0 \in \mathbb{Z}^+$, there exists a finite $k$ such that $n_k = 1$.
 
 
-
-### Trajectory Convergence
-Every orbit of the dynamical system defined by $f$ eventually reaches the fixed point 1.
-
-### Universal Convergence
-$$\forall n_0 \in \mathbb{Z}^+ : \exists k \in \mathbb{N} \text{ such that } f^{(k)}(n_0) = 1$$
-
+Every orbit of the dynamical system defined by $f$ eventually reaches the fixed point 1. 
+$$\forall n_0 \in \mathbb{Z}^+ : \exists k \in \mathbb{N} \text{ such that } f^{(k)}(n_0) = 1$$ 
 where $f^{(k)}$ denotes the $k$-fold composition of $f$.
 
 ## Remarks
@@ -88,7 +79,6 @@ fig_first_25 = create_collatz_with_labels(
 ## Fancy Visualizations
 
 
-
 ```@example plots2
 using CollatzConjecture
 using CairoMakie
@@ -101,7 +91,7 @@ fig
 ```
 
 !!! tip
-    This is still under active development.
+    Checkout the Demos page (and also play with the fractals).
 
 ## Resources for getting started
 
