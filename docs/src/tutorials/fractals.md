@@ -1,4 +1,10 @@
 # Fractals
+The traditional Collatz function uses a simple rule. If a number is even, divide it by 2. If a number is odd, multiply it by 3 and add 1. We can extend this process to work with complex numbers instead of just integers. When we do this, we create beautiful fractal patterns. These patterns help us understand the Collatz conjecture better.
+
+The main idea is to take the function that works on integers and make it work on complex numbers. Then we repeat the Collatz process many times. We need to decide when to stop the process. One simple rule is to stop when the result gets very small (less than 2). We also stop if the result gets very large or if we've done too many steps (like 10,000 steps).
+
+We can use colors to show what happens. Different colors represent how many steps it takes for the process to either converge or diverge. This creates colorful fractal images that reveal hidden patterns in the Collatz conjecture.
+
 
 ```@example FractalPlot
 using CollatzConjecture
