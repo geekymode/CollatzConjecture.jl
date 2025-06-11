@@ -11,10 +11,11 @@ The Collatz Conjecture is a simple yet fascinating mathematical problem that ask
 
 
 
-## Overview
+## The Collatz Function
 
-Definition 1: The Collatz Function
 Let $f: \mathbb{Z}^+ \to \mathbb{Z}^+$ be defined by:
+
+$$f(n) = \begin{cases}
 \frac{n}{2} & \text{if } n \equiv 0 \pmod{2} \\
 3n + 1 & \text{if } n \equiv 1 \pmod{2}
 \end{cases}$$
